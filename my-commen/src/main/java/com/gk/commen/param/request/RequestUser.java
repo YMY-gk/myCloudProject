@@ -1,11 +1,9 @@
-package com.gk.company.param.request;
+package com.gk.commen.param.request;
 
 import lombok.Data;
-import lombok.Synchronized;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author yumuyi

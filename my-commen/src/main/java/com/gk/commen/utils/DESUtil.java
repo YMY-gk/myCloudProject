@@ -1,4 +1,4 @@
-package com.gk.company.utils;
+package com.gk.commen.utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;

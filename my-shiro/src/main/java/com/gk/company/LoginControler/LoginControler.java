@@ -3,13 +3,11 @@ package com.gk.company.LoginControler;
 
 import com.gk.company.param.request.RequestUser;
 import com.gk.company.param.result.LoginResult;
-import com.gk.company.service.IUserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginControler {
 
-    @Autowired
-    IUserService serService;
+
 
     @RequestMapping("/login")
     public LoginResult login(String userName, String password,String url){
@@ -63,7 +60,7 @@ public class LoginControler {
         try
         {
             try {
-                serService.register(user);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

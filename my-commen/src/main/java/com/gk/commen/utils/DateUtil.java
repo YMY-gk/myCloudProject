@@ -1,4 +1,5 @@
-package com.gk.company.utils;
+package com.gk.commen.utils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

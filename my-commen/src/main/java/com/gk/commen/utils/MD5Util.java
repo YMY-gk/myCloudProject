@@ -1,4 +1,4 @@
-package com.gk.company.utils;
+package com.gk.commen.utils;
 
 import java.io.*;
 import java.security.MessageDigest;

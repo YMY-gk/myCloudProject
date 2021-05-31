@@ -1,4 +1,4 @@
-package com.gk.company.utils;
+package com.gk.commen.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
