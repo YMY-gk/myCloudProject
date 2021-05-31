@@ -1,8 +1,9 @@
 package com.gk.company.LoginControler;
 
 
-import com.gk.company.param.request.RequestUser;
-import com.gk.company.param.result.LoginResult;
+
+import com.gk.commen.param.request.RequestUser;
+import com.gk.commen.param.result.LoginResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,7 +25,7 @@ public class LoginControler {
 
 
     @RequestMapping("/login")
-    public LoginResult login(String userName, String password,String url){
+    public LoginResult login(String userName, String password, String url){
 
         LoginResult result = new LoginResult();
 
