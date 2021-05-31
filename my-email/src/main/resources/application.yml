@@ -1,0 +1,21 @@
+server:
+  port: 8096
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+spring:
+  application:
+    name: emqilsever
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ry?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 3306
+  mail:
+    host: smtp.qq.com
+    username: 1010207269@qq.com
+    password: ektbepcespyibdib
+    port: 25
+    protocol: smtp
+    default-encoding: UTF-8

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/my-Eruka/my-Eruka.iml" filepath="$PROJECT_DIR$/my-Eruka/my-Eruka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-activity/my-activity.iml" filepath="$PROJECT_DIR$/my-activity/my-activity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-commen/my-commen.iml" filepath="$PROJECT_DIR$/my-commen/my-commen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-config/my-config.iml" filepath="$PROJECT_DIR$/my-config/my-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-email/my-email.iml" filepath="$PROJECT_DIR$/my-email/my-email.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-mq/my-mq.iml" filepath="$PROJECT_DIR$/my-mq/my-mq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-shiro/my-shiro.iml" filepath="$PROJECT_DIR$/my-shiro/my-shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-shiro8095/my-shiro8095.iml" filepath="$PROJECT_DIR$/my-shiro8095/my-shiro8095.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-zuul/my-zuul.iml" filepath="$PROJECT_DIR$/my-zuul/my-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myCloudProject.iml" filepath="$PROJECT_DIR$/myCloudProject.iml" />
+    </modules>
+  </component>
+</project>

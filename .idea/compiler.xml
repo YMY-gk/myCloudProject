@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="my-shiro" />
+        <module name="my-mq" />
+        <module name="my-Eruka" />
+        <module name="my-email" />
+        <module name="my-zuul" />
+        <module name="my-activity" />
+        <module name="my-config" />
+        <module name="my-shiro8095" />
+        <module name="my-commen" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="my-activity" target="1.5" />
+      <module name="my-commen" target="8" />
+      <module name="my-config" target="1.5" />
+      <module name="my-email" target="1.5" />
+      <module name="my-Eruka" target="1.5" />
+      <module name="my-mq" target="1.5" />
+      <module name="my-shiro" target="1.5" />
+      <module name="my-shiro8095" target="1.5" />
+      <module name="my-zuul" target="1.5" />
+      <module name="myCloudProject" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
