@@ -123,19 +123,21 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-           <!-- &lt;!&ndash;文本&ndash;&gt;
-                &lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui &ndash;&gt;
+<!--            文本
+                 https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui-->
                 <dependency>
                     <groupId>io.springfox</groupId>
                     <artifactId>springfox-swagger-ui</artifactId>
                     <version>${swaggerui.version}</version>
                 </dependency>
-                &lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 &ndash;&gt;
+<!--
+                 https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+-->
                 <dependency>
                     <groupId>io.springfox</groupId>
                     <artifactId>springfox-swagger2</artifactId>
                     <version>${swagger2.version}</version>
-                </dependency>-->
+                </dependency>
             <!-- itext5 start -->
             <dependency>
                 <groupId>com.itextpdf</groupId>
