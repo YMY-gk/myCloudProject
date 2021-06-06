@@ -77,7 +77,8 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/login", "anon");
         // 注册相关
         filterChainDefinitionMap.put("/register", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/**", "anon");
         // 系统权限列表
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
 

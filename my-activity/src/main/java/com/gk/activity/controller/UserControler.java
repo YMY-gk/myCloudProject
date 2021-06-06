@@ -1,5 +1,7 @@
 package com.gk.activity.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
  *@Date 2021/3/31 17:34
  *@Version 1.0
  **/
+@Api("Hello接口")
 @RestController
 public class UserControler {
     @Bean
@@ -23,7 +26,7 @@ public class UserControler {
     }
     @Autowired
     private RestTemplate resttemplate;
-
+    @ApiOperation("查询")
     @RequestMapping("/hello")
     public String hello(){
         //指出服务地址   http://{服务提供者应用名名称}/{具体的controller}
@@ -33,6 +36,7 @@ public class UserControler {
         return resttemplate.getForObject(url, String.class);
 
     }
+    @ApiOperation("查询hi")
     @RequestMapping("/hi")
     public String hi(){
         //指出服务地址   http://{服务提供者应用名名称}/{具体的controller}

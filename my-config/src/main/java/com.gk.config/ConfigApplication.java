@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 
 @SpringBootApplication
-@EnableConfigServer      //zuul服务要注册到Eureka上
+//@EnableConfigServer      //zuul服务要注册到Eureka上
 public class ConfigApplication {
         public static void main(String[] args) {
             SpringApplication.run(ConfigApplication.class, args);

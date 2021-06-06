@@ -10,6 +10,6 @@ spring:
 zuul:
   ignoredServices: '*'
   routes:
-    app-a:
+    company:
       path: /u/**
-      serviceId: user #company
+      serviceId: company
