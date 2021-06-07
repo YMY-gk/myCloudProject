@@ -22,17 +22,17 @@ public class CodeGenerator {
     /**
      * 数据库用户名 密码 url 及注释中author的配置
      */
-    private static String url="jdbc:mysql://rm-bp17mzaq84g25u260yo.mysql.rds.aliyuncs.com:3306/srs_dev?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=utf8";
-    private static String username="srs_admin";
-    private static String password="DJ(#Ur2uy3fh8274y87y8237";
+    private static String url="jdbc:mysql://182.254.221.85:3306/hr?useUnicode=true&characterEncoding=utf8";
+    private static String username="root";
+    private static String password="ROOT_mysql_3306";
     private static String driverName="com.mysql.cj.jdbc.Driver";
-    private static String author = "HuangXun";
+    private static String author = "guokui";
 
 
 
     public static void main(String[] args) {
-        String prefixDao = "/srs-dao";
-        String prefixService = "/srs-service";
+        String prefixDao = "/my-shiro";
+      //  String prefixService = "/srs-service";
 
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -42,7 +42,7 @@ public class CodeGenerator {
         //生成mapper mapper.xml domain的路径
         String projectPathDao = System.getProperty("user.dir")+prefixDao;
         //生成service的路径
-        String projectPathService = System.getProperty("user.dir")+prefixService;
+       // String projectPathService = System.getProperty("user.dir")+prefixService;
         gc.setOutputDir(projectPathDao +"/src/main/java");
         // TODO 设置用户名
         gc.setAuthor(author);
@@ -76,7 +76,7 @@ public class CodeGenerator {
         // TODO 包配置
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("模块名"));
-        pc.setParent("cn.comein.dao.srs.association");
+        pc.setParent("com.gk.company");
         pc.setEntity("domain");
         pc.setMapper("mapper");
         pc.setServiceImpl("service");
@@ -139,10 +139,10 @@ public class CodeGenerator {
         //生成实体时,生成字段注解
         strategy.setEntityTableFieldAnnotationEnable(true);
         // 设置逻辑删除键
-        strategy.setLogicDeleteFieldName("is_del");
+        //strategy.setLogicDeleteFieldName("is_del");
         // TODO 指定生成的bean的数据库表名
 
-        strategy.setInclude("srs_employee_import");
+        strategy.setInclude("sys_user");
         //strategy.setSuperEntityColumns("id");
 
         mpg.setStrategy(strategy);
