@@ -25,6 +25,7 @@
         <result column="update_by" property="updateBy" />
         <result column="update_time" property="updateTime" />
         <result column="remark" property="remark" />
+        <result column="company_id" property="companyId" />
     </resultMap>
 
 </mapper>

@@ -48,7 +48,9 @@ public class CodeGenerator {
         gc.setAuthor(author);
         // service 命名方式
         // service impl 命名方式
-        gc.setServiceImplName("%sService");
+        gc.setServiceImplName("%sServiceImp");
+        gc.setServiceName("%sService");
+        gc.setControllerName("%sController");
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
@@ -80,6 +82,8 @@ public class CodeGenerator {
         pc.setEntity("domain");
         pc.setMapper("mapper");
         pc.setServiceImpl("service");
+        pc.setService("service.impl");
+        pc.setController("%scotroller");
         mpg.setPackageInfo(pc);
 
 
@@ -109,7 +113,7 @@ public class CodeGenerator {
 
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return projectPathDao +"/src/main/resources/mapper/association"
+                return projectPathDao +"/src/main/resources/mapper/company"
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
@@ -142,7 +146,7 @@ public class CodeGenerator {
         //strategy.setLogicDeleteFieldName("is_del");
         // TODO 指定生成的bean的数据库表名
 
-        strategy.setInclude("sys_user");
+        strategy.setInclude("sys_company");
         //strategy.setSuperEntityColumns("id");
 
         mpg.setStrategy(strategy);

@@ -1,4 +1,4 @@
-package com.gk.company.service;
+package com.gk.company.service.impl;
 
 import com.gk.company.domain.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;

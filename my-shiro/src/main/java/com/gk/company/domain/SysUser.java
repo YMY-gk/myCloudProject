@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -115,13 +116,13 @@ public class SysUser extends Model<SysUser> {
      * 最后登录时间
      */
     @TableField("login_date")
-    private LocalDateTime loginDate;
+    private Date loginDate;
 
     /**
      * 密码最后更新时间
      */
     @TableField("pwd_update_date")
-    private LocalDateTime pwdUpdateDate;
+    private Date pwdUpdateDate;
 
     /**
      * 创建者
@@ -133,7 +134,7 @@ public class SysUser extends Model<SysUser> {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新者
@@ -145,7 +146,7 @@ public class SysUser extends Model<SysUser> {
      * 更新时间
      */
     @TableField("update_time")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 备注
@@ -153,6 +154,11 @@ public class SysUser extends Model<SysUser> {
     @TableField("remark")
     private String remark;
 
+    /**
+     * 关联公司
+     */
+    @TableField("company_id")
+    private String companyId;
 
     @Override
     protected Serializable pkVal() {

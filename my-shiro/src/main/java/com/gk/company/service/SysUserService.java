@@ -2,7 +2,7 @@ package com.gk.company.service;
 
 import com.gk.company.domain.SysUser;
 import com.gk.company.mapper.SysUserMapper;
-import com.gk.company.service.ISysUserService;
+import com.gk.company.service.impl.ISysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

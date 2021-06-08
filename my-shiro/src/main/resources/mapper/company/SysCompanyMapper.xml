@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gk.company.mapper.SysCompanyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gk.company.domain.SysCompany">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="remark" property="remark" />
+        <result column="manager_id" property="managerId" />
+        <result column="version" property="version" />
+        <result column="renewal_date" property="renewalDate" />
+        <result column="expiration_date" property="expirationDate" />
+        <result column="company_area" property="companyArea" />
+        <result column="company_address" property="companyAddress" />
+        <result column="business_license" property="businessLicense" />
+        <result column="legal_representative" property="legalRepresentative" />
+        <result column="company_phone" property="companyPhone" />
+        <result column="mailbox" property="mailbox" />
+        <result column="company_size" property="companySize" />
+        <result column="industry" property="industry" />
+        <result column="audit_state" property="auditState" />
+        <result column="state" property="state" />
+        <result column="balance" property="balance" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+</mapper>
