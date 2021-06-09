@@ -1,4 +1,4 @@
-package com.gk.company.domain;
+package com.gk.company.organization.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;

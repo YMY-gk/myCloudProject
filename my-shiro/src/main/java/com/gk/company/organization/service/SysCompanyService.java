@@ -1,4 +1,4 @@
-package com.gk.company.service;
+package com.gk.company.organization.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,17 +9,13 @@ import com.gk.commen.entity.ResultObject;
 import com.gk.commen.entity.ResultObjectUtil;
 import com.gk.commen.param.request.CompanyReq;
 import com.gk.commen.param.request.CompanySearch;
-import com.gk.commen.param.request.UserReq;
-import com.gk.commen.param.request.UserSearch;
-import com.gk.company.domain.SysCompany;
-import com.gk.company.domain.SysUser;
-import com.gk.company.mapper.SysCompanyMapper;
-import com.gk.company.service.impl.ISysCompanyService;
+import com.gk.company.organization.domain.SysCompany;
+import com.gk.company.organization.mapper.SysCompanyMapper;
+import com.gk.company.organization.service.impl.ISysCompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package com.gk.company.service;
+package com.gk.company.organization.service;
 
 import com.gk.company.model.User;
 import com.gk.company.param.request.RequestUser;

@@ -1,6 +1,6 @@
-package com.gk.company.service.impl;
+package com.gk.company.organization.service.impl;
 
-import com.gk.company.domain.SysUser;
+import com.gk.company.organization.domain.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

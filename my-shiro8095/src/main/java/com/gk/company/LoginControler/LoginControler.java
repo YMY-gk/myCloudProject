@@ -3,7 +3,7 @@ package com.gk.company.LoginControler;
 
 import com.gk.company.param.request.RequestUser;
 import com.gk.company.param.result.LoginResult;
-import com.gk.company.service.IUserService;
+import com.gk.company.organization.service.IUserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

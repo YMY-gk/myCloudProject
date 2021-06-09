@@ -1,6 +1,6 @@
-package com.gk.company.mapper;
+package com.gk.company.organization.mapper;
 
-import com.gk.company.domain.SysUser;
+import com.gk.company.organization.domain.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

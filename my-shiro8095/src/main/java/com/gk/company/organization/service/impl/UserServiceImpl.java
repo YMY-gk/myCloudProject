@@ -1,10 +1,9 @@
-package com.gk.company.service.impl;
+package com.gk.company.organization.service.impl;
 
 import com.gk.company.dao.UserMapper;
 import com.gk.company.model.User;
 import com.gk.company.param.request.RequestUser;
-import com.gk.company.service.IUserService;
-import com.gk.company.utils.MD5Util;
+import com.gk.company.organization.service.IUserService;
 import com.gk.company.utils.MD6Util;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
