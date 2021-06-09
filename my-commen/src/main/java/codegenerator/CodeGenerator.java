@@ -78,11 +78,11 @@ public class CodeGenerator {
         // TODO 包配置
         PackageConfig pc = new PackageConfig();
         //pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.gk.company");
+        pc.setParent("com.gk.company.menu");
         pc.setEntity("domain");
         pc.setMapper("mapper");
-        pc.setServiceImpl("service");
-        pc.setService("service.impl");
+        pc.setService("service");
+        pc.setServiceImpl("service.impl");
         pc.setController("%scotroller");
         mpg.setPackageInfo(pc);
 
@@ -113,7 +113,7 @@ public class CodeGenerator {
 
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return projectPathDao +"/src/main/resources/mapper/company"
+                return projectPathDao +"/src/main/resources/mapper/menu"
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
@@ -146,7 +146,7 @@ public class CodeGenerator {
         //strategy.setLogicDeleteFieldName("is_del");
         // TODO 指定生成的bean的数据库表名
 
-        strategy.setInclude("sys_company");
+        strategy.setInclude("sys_menu");
         //strategy.setSuperEntityColumns("id");
 
         mpg.setStrategy(strategy);
