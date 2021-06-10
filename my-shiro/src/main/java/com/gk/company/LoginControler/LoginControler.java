@@ -4,6 +4,8 @@ package com.gk.company.LoginControler;
 
 import com.gk.commen.param.request.RequestUser;
 import com.gk.commen.param.result.LoginResult;
+import com.gk.company.utils.JwtsUtils;
+import io.jsonwebtoken.Jwt;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,6 +13,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 /**
  *@ClassName LoginControler
@@ -35,6 +39,10 @@ public class LoginControler {
         {
             subject.login(token);
             System.out.println(subject.getSession().getId());
+            HashMap<String,Object> map = new HashMap<String, Object>();
+            map.put("username",userName);
+            map.put("password",password);
+            String token = JwtsUtils.createJWT(,map);
             result.setCode("400");
             result.setToken(token.toString());
             return  result;

@@ -30,3 +30,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:mybatis/mapper/*/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
   type-aliases-package: cn.gk.*.model.*  # 注意：对应实体类的路径
+jwt:
+  config:
+    key: ddddddddddd
+    ttl: 1233122
