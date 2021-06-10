@@ -1,6 +1,7 @@
 package com.gk.commen.utils;
 
 import com.gk.commen.param.request.UserReq;
+import com.gk.commen.param.result.UserResult;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -10,6 +11,7 @@ import org.apache.catalina.User;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author yumuyi
@@ -42,7 +44,7 @@ public class JwtsUtils {
      * @param user      登录成功的user对象
      * @return
      */
-    public static String createJWT(long ttlMillis, User user) {
+    public static String createJWT(long ttlMillis, UserResult user) {
         //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -52,15 +54,16 @@ public class JwtsUtils {
 
         //创建payload的私有声明（根据特定的业务需要添加，如果要拿这个做验证，一般是需要和jwt的接收方提前沟通好验证方式的）
         Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put("id", user.getId());
-        claims.put("username", user.getUsername());
+        claims.put("id", user.getUserId());
+        claims.put("username", user.getUserName());
         claims.put("password", user.getPassword());
 
-        //生成签名的时候使用的秘钥secret,这个方法本地封装了的，一般可以从本地配置文件中读取，切记这个秘钥不能外露哦。它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了。
+        //生成签名的时候使用的秘钥secret,这个方法本地封装了的，一般可以从本地配置文件中读取，切记这个秘钥不能外露哦。
+        // 它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了。
         String key = user.getPassword();
 
         //生成签发人
-        String subject = user.getUsername();
+        String subject = user.getUserName();
 
 
 
