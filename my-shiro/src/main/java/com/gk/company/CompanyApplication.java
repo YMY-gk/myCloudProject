@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  *@ClassName CompanyApplication
@@ -14,7 +15,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  **/
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan(basePackages = "com.gk.*.dao")
+@MapperScan(basePackages = "com.gk.*.*.mapper")
 public class CompanyApplication {
         public static void main(String[] args) {
             SpringApplication.run(CompanyApplication.class, args);

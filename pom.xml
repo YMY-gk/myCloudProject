@@ -41,6 +41,7 @@
         <module>my-mq</module>
         <module>my-email</module>
         <module>my-commen</module>
+        <module>My-DesignPatterns</module>
     </modules>
 
     <dependencyManagement>

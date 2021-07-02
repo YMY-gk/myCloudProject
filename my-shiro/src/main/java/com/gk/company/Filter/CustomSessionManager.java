@@ -29,7 +29,7 @@ public class CustomSessionManager extends DefaultWebSessionManager {
      */
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
         // TODO Auto-generated method stub
-        String sessionId = "5bf53989-3525-4cd3-aa3b-2d4f14caa248";//WebUtils.toHttp(request).getHeader(AUTHORIZATION);
+        String sessionId = WebUtils.toHttp(request).getHeader(AUTHORIZATION);
         if (StringUtils.isNotEmpty(sessionId)) {
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
