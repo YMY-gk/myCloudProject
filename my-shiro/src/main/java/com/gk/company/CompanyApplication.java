@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  **/
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan(basePackages = "com.gk.*.*.mapper")
+@MapperScan(basePackages = "com.gk.company.*.mapper")
 public class CompanyApplication {
         public static void main(String[] args) {
             SpringApplication.run(CompanyApplication.class, args);
