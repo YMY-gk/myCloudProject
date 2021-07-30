@@ -36,7 +36,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class Solution {
     public static void main(String[] args) {
-
+       // int[] A = {8, 3, 8, 5, 1, 5};
+        int[] A = {773, 197, 9, 545, 107, 356, 155, 194, 375, 733, 705, 415, 496, 615, 187, 121, 448, 408, 168, 770, 904, 906, 903, 77, 118, 734, 335, 426, 733, 988, 999, 506, 186, 360, 403, 293, 716, 559, 839, 444, 644, 896, 211, 493, 511, 398, 614, 960, 807, 782, 82, 63, 689, 985, 140, 159, 71, 827, 586, 804, 168, 585, 662, 354, 297, 66, 999, 13, 977, 191, 457, 973, 87, 668, 466, 599, 419, 81, 911, 578, 863, 993, 641, 904, 330, 133, 416, 401, 313, 2, 558, 481, 939, 220, 835, 236, 638, 186, 601, 967, 377, 411, 941, 465, 431, 407, 416, 850, 840, 679, 428, 56, 24, 421, 960, 354, 555, 728, 755, 868, 82, 665, 349, 373, 886, 536, 609, 524, 722, 563, 844, 452, 974, 785, 269, 405, 544, 685, 608, 385, 716, 36, 441, 740, 810, 753, 94, 365, 482, 201, 585, 564, 867, 934, 938, 753, 822, 899, 629, 896, 462, 473, 348, 788, 610, 617, 546, 155, 654, 154, 540, 370, 542, 981, 110, 704, 86, 204, 69, 568, 758, 6, 485, 625, 292, 423, 730, 114, 674, 711, 11, 137, 537, 359, 277, 147, 329, 175, 654, 983, 681, 546, 706, 576, 879, 816, 280, 966, 373, 350, 534, 131, 356, 19, 108, 649, 794, 838, 115, 469};
+        int k = 20;
+        System.out.println(PartitioningArray(A,k));
     }
 
     /**
@@ -49,10 +52,13 @@ public class Solution {
      *       大于:
      *          判断段是否有重复，有且相同重复数量是否大于n/n+1（有余数）
      *              是：false
-     *              否：true
+     *              否： 判断不同重复数的数量是否大于大于n/n+1（有余数）
+     *                  是：false
+     *                  否：
+     *
      *
      */
-    public boolean PartitioningArray(int[] A, int k) {
+    public static boolean PartitioningArray(int[] A, int k) {
         // write your code here
         int l = A.length;
 
@@ -62,18 +68,20 @@ public class Solution {
         }
         int n = A.length%k;
         if (n>0){
-            m=m+1;
+            return false;
         }
         int d = m;
         HashMap<Integer,Integer> map = new HashMap<>();
-        AtomicBoolean aa = new AtomicBoolean(false);
+        HashMap<String,Boolean> map1 = new HashMap<>();
+        map1.put("aa",false);
+
 
         Set<Integer> set = new HashSet<>();
         Arrays.stream(A).forEach(i->{
             Integer num=1;
             if(set.contains(i)){
                 set.remove(i);
-                map.put(i,num);
+                map.put(i,num+1);
             }else
             if(map.get(i)!=null)
             {
@@ -81,19 +89,24 @@ public class Solution {
 
                 map.put(i,num);
                 if (num>d){
-                    aa.set(true);
+                    map1.put("aa",true);
                 }
 
             }else {
                 set.add(i);
             }
         });
-        if (aa.get()){
+        if (map1.get("aa")){
             return  false;
         }
-        if (map.size()>d){
-            return  false;
-        }
+
+            int ss =  set.size()+map.size();
+            if(ss<=m){
+                return  false;
+            }else  if(ss<=k){
+                return  false;
+
+            }
 
         return true;
     }
