@@ -6,10 +6,9 @@ import com.gk.commen.param.request.RequestUser;
 import com.gk.commen.param.result.LoginResult;
 import com.gk.commen.param.result.UserResult;
 import com.gk.company.organization.domain.SysUser;
-import com.gk.company.organization.service.SysUserService;
-import com.gk.company.organization.service.impl.ISysUserService;
+import com.gk.company.organization.service.ISysUserService;
+import com.gk.company.organization.service.impl.SysUserService;
 import com.gk.company.utils.JwtsUtils;
-import io.jsonwebtoken.Jwt;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -18,7 +17,6 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,8 +32,8 @@ import java.util.HashMap;
 @RestController
 public class LoginControler {
 
-    @Autowired
-    public ISysUserService userService;
+//    @Autowired
+//    public SysUserService userService;
 
     @RequestMapping("/login")
     public LoginResult login(String userName, String password, String url){
@@ -52,7 +50,7 @@ public class LoginControler {
             Session session = subject.getSession();
             map.put("sessionId",session.getId());
             map.put("password",password);
-            SysUser suser = userService.findByName(userName);
+            SysUser suser =  new SysUser();//userService.findByName(userName);
             UserResult user = new UserResult();
             BeanUtils.copyProperties(suser,user);
             String jwtToken = JwtsUtils.createJWT(user,map);

@@ -1,4 +1,4 @@
-package com.gk.company.organization.service;
+package com.gk.company.organization.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -11,7 +11,7 @@ import com.gk.commen.param.request.CompanyReq;
 import com.gk.commen.param.request.CompanySearch;
 import com.gk.company.organization.domain.SysCompany;
 import com.gk.company.organization.mapper.SysCompanyMapper;
-import com.gk.company.organization.service.impl.ISysCompanyService;
+import com.gk.company.organization.service.ISysCompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

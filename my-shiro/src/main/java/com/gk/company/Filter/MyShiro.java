@@ -1,8 +1,6 @@
 package com.gk.company.Filter;
 
 import com.gk.company.organization.domain.SysUser;
-import com.gk.company.organization.service.SysUserService;
-import com.gk.company.organization.service.impl.ISysUserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -12,9 +10,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author yumuyi
@@ -22,17 +17,18 @@ import org.springframework.stereotype.Component;
  * @date 2021/4/11 23:36
  */
 public class MyShiro extends AuthorizingRealm {
-
-    @Autowired
-    public ISysUserService userService;
+//    public ISysUserService userService ;
+//    public void setUserService(ISysUserService userService) {
+//        this.userService = userService;
+//    }
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //principals.getPrimaryPrincipal()获得的就是当前用户名
-        System.out.println("授权处理---------------------------------------》"+principals.getPrimaryPrincipal());
-        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
-        if (principals == null || StringUtils.isBlank((String) principals.getPrimaryPrincipal())) {
-            return null;
-        }
+//        System.out.println("授权处理---------------------------------------》"+principals.getPrimaryPrincipal());
+//        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
+//        if (principals == null || StringUtils.isBlank((String) principals.getPrimaryPrincipal())) {
+//            return null;
+//        }
         //将用户角色信息传入SimpleAuthorizationInfo
         SimpleAuthorizationInfo simpleAuthorizationInfo= new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addRole("admin");
@@ -49,7 +45,7 @@ public class MyShiro extends AuthorizingRealm {
             return null;
         }
         PrincipalCollection principals = (PrincipalCollection) token.getPrincipal();
-        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
+        SysUser user = new SysUser();//userService.findByName((String) principals.getPrimaryPrincipal());
 
         if (user == null) {
             return null;

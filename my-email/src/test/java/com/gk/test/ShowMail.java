@@ -4,6 +4,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.mail.search.FromStringTerm;
 import javax.mail.search.FromTerm;
 import javax.mail.search.SearchTerm;
 import java.io.*;
@@ -387,7 +388,7 @@ public class ShowMail {
 
         Folder folder = store.getFolder("INBOX");
         folder.open(Folder.READ_ONLY);
-        SearchTerm term = new FromTerm("1010207269@qq.com");
+        SearchTerm term = new FromStringTerm("1010207269@qq.com");
         Message message[] = folder.search(term);
         System.out.println("邮件数量:　" + message.length);
         ShowMail re = null;

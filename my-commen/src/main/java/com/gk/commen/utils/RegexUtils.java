@@ -1,7 +1,5 @@
 package com.gk.commen.utils;
-
-
-import org.apache.commons.lang.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;

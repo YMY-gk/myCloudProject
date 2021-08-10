@@ -1,4 +1,4 @@
-package com.gk.company.organization.service;
+package com.gk.company.organization.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -12,7 +12,7 @@ import com.gk.commen.param.request.UserSearch;
 import com.gk.commen.utils.MD6Util;
 import com.gk.company.organization.domain.SysUser;
 import com.gk.company.organization.mapper.SysUserMapper;
-import com.gk.company.organization.service.impl.ISysUserService;
+import com.gk.company.organization.service.ISysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.Md5Hash;

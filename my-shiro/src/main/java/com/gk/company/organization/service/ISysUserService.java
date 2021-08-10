@@ -1,4 +1,4 @@
-package com.gk.company.organization.service.impl;
+package com.gk.company.organization.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

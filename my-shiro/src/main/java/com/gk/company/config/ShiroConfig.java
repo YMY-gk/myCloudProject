@@ -15,9 +15,11 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,7 +39,6 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig
 {
-
     /**
      * SecurityManager：安全管理器
      */
@@ -90,7 +91,6 @@ public class ShiroConfig
     public MyShiro userRealm(RedisTemplate redisTemplate)
     {
         MyShiro userRealm = new MyShiro();
-
         //增加加密处理
         HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
         matcher.setHashAlgorithmName("md5");//设置加密算法名称
@@ -121,11 +121,7 @@ public class ShiroConfig
         redisTemplate.setHashKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
      //   redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
-
         redisTemplate.afterPropertiesSet();
-
-
-
         return redisTemplate;
     }
 
