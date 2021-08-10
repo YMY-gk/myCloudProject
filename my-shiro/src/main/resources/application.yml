@@ -17,10 +17,6 @@ spring:
     password: redis_6379
     port: 6379
     timeout: 5000
-#mybatis:
-#  config-location: classpath:mybatis/mybatis.xml
-#  mapper-locations: classpath:mybatis/mapper/*.xml
-#  type-aliases-package: con.gk.*.dao
 mybatis-plus:
   global-config:
     db-config:
