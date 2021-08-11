@@ -22,7 +22,7 @@ import java.util.Date;
  * @author guokui
  * @since 2021-06-09
  */
-public interface ISysMenuService extends IService<SysMenu> {
+public interface ISysMenuService  {
     public ResultObject add(MenuReq user);
     public ResultObject edit(MenuReq user);
     public ResultObject findByid(Integer id);

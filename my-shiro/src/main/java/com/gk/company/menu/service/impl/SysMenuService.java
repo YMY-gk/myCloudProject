@@ -12,7 +12,6 @@ import com.gk.commen.param.request.MenuReq;
 import com.gk.commen.param.request.MenuSearch;
 import com.gk.company.menu.domain.SysMenu;
 import com.gk.company.menu.mapper.SysMenuMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gk.company.menu.service.ISysMenuService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -27,7 +26,7 @@ import java.util.Date;
  * @since 2021-06-09
  */
 @Service
-public class SysMenuService extends ServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
+public class SysMenuService implements ISysMenuService {
     @Resource
     private SysMenuMapper mapper;
 

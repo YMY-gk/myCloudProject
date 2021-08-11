@@ -2,6 +2,7 @@ package com.gk.company.menu.mapper;
 
 import com.gk.company.menu.domain.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.mapstruct.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author guokui
  * @since 2021-06-09
  */
+@Mapper
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
 }

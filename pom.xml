@@ -22,6 +22,7 @@
         <fastjson.version>1.2.74</fastjson.version>
         <hutool.version>5.6.5</hutool.version>
         <baomidou.version>3.4.2</baomidou.version>
+        <generator.version>3.4.1</generator.version>
         <swagger2.version>2.7.0</swagger2.version>
         <swaggerui.version>2.7.0</swaggerui.version>
         <itextpdf.version>5.5.10</itextpdf.version>
@@ -66,6 +67,11 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${baomidou.version}</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${generator.version}</version>
             </dependency>
             <!-- 定义 mysql 版本 -->
             <dependency>
