@@ -32,8 +32,8 @@ import java.util.HashMap;
 @RestController
 public class LoginControler {
 
-//    @Autowired
-//    public SysUserService userService;
+    @Autowired
+    public SysUserService userService;
 
     @RequestMapping("/login")
     public LoginResult login(String userName, String password, String url){
@@ -50,7 +50,7 @@ public class LoginControler {
             Session session = subject.getSession();
             map.put("sessionId",session.getId());
             map.put("password",password);
-            SysUser suser =  new SysUser();//userService.findByName(userName);
+            SysUser suser =  userService.findByName(userName);
             UserResult user = new UserResult();
             BeanUtils.copyProperties(suser,user);
             String jwtToken = JwtsUtils.createJWT(user,map);

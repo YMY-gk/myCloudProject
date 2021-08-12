@@ -120,7 +120,7 @@ public class ShiroConfig
         redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setHashKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
-     //   redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

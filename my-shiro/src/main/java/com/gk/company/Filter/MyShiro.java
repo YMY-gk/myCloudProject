@@ -1,6 +1,7 @@
 package com.gk.company.Filter;
 
 import com.gk.company.organization.domain.SysUser;
+import com.gk.company.organization.service.ISysUserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -17,18 +18,16 @@ import org.apache.shiro.subject.PrincipalCollection;
  * @date 2021/4/11 23:36
  */
 public class MyShiro extends AuthorizingRealm {
-//    public ISysUserService userService ;
-//    public void setUserService(ISysUserService userService) {
-//        this.userService = userService;
-//    }
+    public ISysUserService userService ;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //principals.getPrimaryPrincipal()获得的就是当前用户名
-//        System.out.println("授权处理---------------------------------------》"+principals.getPrimaryPrincipal());
-//        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
-//        if (principals == null || StringUtils.isBlank((String) principals.getPrimaryPrincipal())) {
-//            return null;
-//        }
+        System.out.println("授权处理---------------------------------------》"+principals.getPrimaryPrincipal());
+        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
+        if (principals == null || StringUtils.isBlank((String) principals.getPrimaryPrincipal())) {
+            return null;
+        }
         //将用户角色信息传入SimpleAuthorizationInfo
         SimpleAuthorizationInfo simpleAuthorizationInfo= new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addRole("admin");
@@ -45,7 +44,7 @@ public class MyShiro extends AuthorizingRealm {
             return null;
         }
         PrincipalCollection principals = (PrincipalCollection) token.getPrincipal();
-        SysUser user = new SysUser();//userService.findByName((String) principals.getPrimaryPrincipal());
+        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
 
         if (user == null) {
             return null;
