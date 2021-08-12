@@ -12,12 +12,15 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+import javax.annotation.Resource;
+
 /**
  * @author yumuyi
  * @version 1.0
  * @date 2021/4/11 23:36
  */
 public class MyShiro extends AuthorizingRealm {
+    @Resource
     public ISysUserService userService ;
 
     @Override
@@ -43,12 +46,15 @@ public class MyShiro extends AuthorizingRealm {
         if (token == null||StringUtils.isBlank((String) token.getPrincipal())) {
             return null;
         }
-        PrincipalCollection principals = (PrincipalCollection) token.getPrincipal();
-        SysUser user = userService.findByName((String) principals.getPrimaryPrincipal());
+
+        String name =(String) token.getPrincipal();
+        SysUser user = userService.findByName(name);
 
         if (user == null) {
             return null;
         }
+
+        
         //SimpleAuthenticationInfo代表该用户的认证信息，其实就是数据库中的用户名、密码、加密密码使用的盐
         //存在数据库中的密码是对用户真是密码通过md5加盐加密得到的，保证安全，及时数据泄露，也得不到真正的用户密码
         //getName()返回该realm的名字，代表该认证信息的来源是该realm，作用不大，一般都是单realm

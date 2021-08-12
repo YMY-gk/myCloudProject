@@ -3,6 +3,7 @@ package com.gk.company.LoginControler;
 
 
 import com.gk.commen.param.request.RequestUser;
+import com.gk.commen.param.request.UserReq;
 import com.gk.commen.param.result.LoginResult;
 import com.gk.commen.param.result.UserResult;
 import com.gk.company.organization.domain.SysUser;
@@ -33,7 +34,7 @@ import java.util.HashMap;
 public class LoginControler {
 
     @Autowired
-    public SysUserService userService;
+    public ISysUserService userService;
 
     @RequestMapping("/login")
     public LoginResult login(String userName, String password, String url){
@@ -74,17 +75,17 @@ public class LoginControler {
     }
 
     @RequestMapping("/register")
-    public LoginResult register(RequestUser user){
+    public LoginResult register(UserReq user){
 
         LoginResult result = new LoginResult();
         try
         {
             try {
-
+                userService.add(user);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            result.setCode("400");
+            result.setCode("200");
             return  result;
         }
         catch (AuthenticationException e)
