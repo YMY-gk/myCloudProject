@@ -120,7 +120,7 @@ public class ShiroConfig
         redisTemplate.setKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setHashKeySerializer(jackson2JsonRedisSerializer);
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
-        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+     //   redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
@@ -137,7 +137,7 @@ public class ShiroConfig
     public CustomSessionManager getDefaultWebSessionManager(RedisSessionDAO redisSessionDAO) {
         CustomSessionManager  sessionManager = new CustomSessionManager();
         sessionManager.setSessionDAO(redisSessionDAO);
-        sessionManager.setGlobalSessionTimeout(-1000);  //session有效期 默认值1800000 30分钟 1800000毫秒  -1000表示永久
+       // sessionManager.setGlobalSessionTimeout(-1000);  //session有效期 默认值1800000 30分钟 1800000毫秒  -1000表示永久
         SimpleCookie simpleCookie = getSimpleCookie();
         simpleCookie.setHttpOnly(true);                 //设置js不可读取此Cookie
         simpleCookie.setMaxAge(3 * 365 * 24 * 60 * 60); //3年 cookie有效期

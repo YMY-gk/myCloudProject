@@ -41,17 +41,16 @@ public class LoginControler {
 
         LoginResult result = new LoginResult();
 
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password, true);
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         Subject subject = SecurityUtils.getSubject();
         try
         {
             subject.login(token);
-            System.out.println(subject.getSession().getId());
+            SysUser suser =  userService.findByName(userName);
             HashMap<String,Object> map = new HashMap<String, Object>();
             Session session = subject.getSession();
             map.put("sessionId",session.getId());
-            map.put("password",password);
-            SysUser suser =  userService.findByName(userName);
+            map.put("password",suser.getPassword());
             UserResult user = new UserResult();
             BeanUtils.copyProperties(suser,user);
             String jwtToken = JwtsUtils.createJWT(user,map);
