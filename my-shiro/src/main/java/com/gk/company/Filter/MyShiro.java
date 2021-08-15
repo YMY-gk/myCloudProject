@@ -54,12 +54,12 @@ public class MyShiro extends AuthorizingRealm {
             return null;
         }
 
-        
+
         //SimpleAuthenticationInfo代表该用户的认证信息，其实就是数据库中的用户名、密码、加密密码使用的盐
         //存在数据库中的密码是对用户真是密码通过md5加盐加密得到的，保证安全，及时数据泄露，也得不到真正的用户密码
         //getName()返回该realm的名字，代表该认证信息的来源是该realm，作用不大，一般都是单realm
         //该方法返回后，上层会对token和SimpleAuthenticationInfo进行比较，首先比较Principal()，然后将token的Credentials
         //进行md5加上SimpleAuthenticationInfo中的盐加密，加密结果和SimpleAuthenticationInfo的Credentials比较
-        return new SimpleAuthenticationInfo( user.getUserName(), user.getPassword(), new MyByteSource(user.getSalt()), getName());
+        return new SimpleAuthenticationInfo( user.getLoginName(), user.getPassword(), new MyByteSource(user.getSalt()), getName());
     }
 }
