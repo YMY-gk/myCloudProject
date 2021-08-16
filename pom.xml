@@ -30,6 +30,7 @@
         <xmlworker.version>5.5.11</xmlworker.version>
         <jwt.version>3.4.0</jwt.version>
         <jwtt.version>0.9.1</jwtt.version>
+
     </properties>
 
     <modules>
