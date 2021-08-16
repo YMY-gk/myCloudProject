@@ -34,15 +34,19 @@ public class CustomSessionManager extends DefaultWebSessionManager {
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
         // TODO Auto-generated method stub
         String sessionId = WebUtils.toHttp(request).getHeader(AUTHORIZATION);
-        if (StringUtils.isNotEmpty(sessionId)) {
-            String token = sessionId.replace("Bearer","").trim();
-            Claims claims = JwtsUtils.parseJWT(token);
-            sessionId = (String) claims.get("sessionId");
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
-            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
-            log.info("sessionId------------------>"+sessionId);
-            return sessionId;
+        try {
+            if (StringUtils.isNotEmpty(sessionId)) {
+                String token = sessionId.replace("Bearer", "").trim();
+                Claims claims = JwtsUtils.parseJWT(token);
+                sessionId = (String) claims.get("sessionId");
+                request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
+                request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sessionId);
+                request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+                log.info("sessionId------------------>" + sessionId);
+                return sessionId;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return super.getSessionId(request, response);
     }

@@ -23,6 +23,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -145,6 +146,15 @@ public class ShiroConfig
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
      //   redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.afterPropertiesSet();
+
+        // 1.创建 redisTemplate 模版
+        // 2.关联 redisConnectionFactory
+        // 3.创建 序列化类
+        // 4.设置可见度
+        // 5.启动默认的类型
+        // 6.序列化类，对象映射设置
+        // 7.设置 value 的转化格式和 key 的转化格式
+
         return redisTemplate;
     }
 

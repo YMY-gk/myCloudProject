@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author yumuyi
@@ -30,7 +31,8 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
     protected Serializable doCreate(Session session) {
         Serializable sessionId = super.doCreate(session);
         try {
-            redisTemplate.opsForHash().putIfAbsent("shiro:session",sessionId.toString(), session);
+            redisTemplate.opsForValue().setIfAbsent("shiro:session:"+sessionId.toString(), session);
+            redisTemplate.expire("shiro:session:"+sessionId.toString(),3600L, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +50,8 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
         Session session = super.doReadSession(sessionId);
         if (session == null) {
             try {
-                session = (Session)redisTemplate.opsForHash().get("shiro:session",sessionId.toString());
+                session = (Session)redisTemplate.opsForValue().get("shiro:session:"+sessionId.toString());
+                redisTemplate.expire("shiro:session:"+sessionId.toString(),3600L, TimeUnit.SECONDS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,8 +67,8 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
     protected void doUpdate(Session session) {
         super.doUpdate(session);
         try {
-            redisTemplate.opsForHash().putIfAbsent("shiro:session",session.getId().toString(), session);
-        } catch (Exception e) {
+            redisTemplate.opsForValue().setIfAbsent("shiro:session:"+session.getId().toString(), session);
+            redisTemplate.expire("shiro:session:"+session.getId().toString(),3600L, TimeUnit.SECONDS);        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -78,7 +81,8 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
     protected void doDelete(Session session) {
         super.doDelete(session);
         try {
-            redisTemplate.opsForHash().delete("shiro:session",session.getId().toString());
+            redisTemplate.delete("shiro:session:"+session.getId().toString());
+            redisTemplate.expire("shiro:session:"+session.getId().toString(),1L, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }

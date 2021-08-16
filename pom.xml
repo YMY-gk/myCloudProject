@@ -30,7 +30,6 @@
         <xmlworker.version>5.5.11</xmlworker.version>
         <jwt.version>3.4.0</jwt.version>
         <jwtt.version>0.9.1</jwtt.version>
-
     </properties>
 
     <modules>
@@ -44,6 +43,7 @@
         <module>my-email</module>
         <module>my-commen</module>
         <module>My-DesignPatterns</module>
+        <module>my-Oauth2</module>
     </modules>
 
     <dependencyManagement>
