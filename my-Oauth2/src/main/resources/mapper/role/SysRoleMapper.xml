@@ -3,7 +3,7 @@
 <mapper namespace="com.gk.company.role.mapper.SysRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.gk.company.role.domain.SysRole">
+    <resultMap id="BaseResultMap" type="com.gk.oauth.role.domain.SysRole">
         <id column="role_id" property="roleId" />
         <result column="role_name" property="roleName" />
         <result column="role_key" property="roleKey" />

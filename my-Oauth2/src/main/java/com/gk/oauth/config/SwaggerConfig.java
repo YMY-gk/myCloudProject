@@ -1,14 +1,17 @@
-package com.gk.company.config;
+package com.gk.oauth.config;
 
 /**
  * @author yumuyi
  * @version 1.0
  * @date 2021/6/1 23:26
  */
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import springfox.documentation.builders.*;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -30,7 +33,7 @@ public class SwaggerConfig {
                 .enable(true)         //是否启用swagger
                 .apiInfo(apiInfo()) //
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.gk.company.LoginControler")) //指定扫描的报
+                .apis(RequestHandlerSelectors.basePackage("com.gk.oauth.LoginControler")) //指定扫描的报
                 .paths(PathSelectors.any())  //过滤扫描路径下的包含“**”的路径
                 .build() ;
     }

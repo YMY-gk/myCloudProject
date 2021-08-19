@@ -3,7 +3,7 @@
 <mapper namespace="com.gk.company.organization.mapper.SysCompanyMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.gk.company.organization.domain.SysCompany">
+    <resultMap id="BaseResultMap" type="com.gk.oauth.organization.domain.SysCompany">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="remark" property="remark" />

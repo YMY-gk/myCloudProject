@@ -3,7 +3,7 @@
 <mapper namespace="com.gk.company.menu.mapper.SysMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.gk.company.menu.domain.SysMenu">
+    <resultMap id="BaseResultMap" type="com.gk.oauth.menu.domain.SysMenu">
         <id column="menu_id" property="menuId" />
         <result column="menu_name" property="menuName" />
         <result column="parent_id" property="parentId" />
