@@ -22,15 +22,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //获取登录用户
     @Bean
     public UserDetailsService userDetailsService(){
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("张三").password("123456").authorities("gk").build());
+        manager.createUser(User.withUsername("zhangsan").password("123456").authorities("gk").build());
         return manager;
     }
     @Bean
@@ -42,10 +40,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //配置认证规则
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.
-                authorizeRequests().antMatchers("/**").permitAll().
-                and().formLogin().successForwardUrl("/login-success").//允许表单登录
-                and().authorizeRequests().anyRequest().permitAll();
+        httpSecurity.authorizeRequests()
+                .antMatchers("/user/**").permitAll() //释放拦截资源
+                .and().formLogin().loginProcessingUrl("/user/login") // 自定义的登录接口
+                      .successForwardUrl("/user/sayHi").permitAll()//允许表单登录
+                .and().authorizeRequests().anyRequest().permitAll()
+                .and().csrf().disable();//其他请求需要认证
 
     }
 
