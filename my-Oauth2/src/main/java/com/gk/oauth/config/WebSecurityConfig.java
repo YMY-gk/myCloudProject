@@ -25,12 +25,12 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //获取登录用户
-    @Bean
-    public UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("zhangsan").password("123456").authorities("gk").build());
-        return manager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withUsername("zhangsan").password("123456").authorities("gk").build());
+//        return manager;
+//    }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return NoOpPasswordEncoder.getInstance();
@@ -40,13 +40,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //配置认证规则
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers("/user/**").permitAll() //释放拦截资源
-                .and().formLogin().loginProcessingUrl("/user/login") // 自定义的登录接口
-                      .successForwardUrl("/user/sayHi").permitAll()//允许表单登录
-                .and().authorizeRequests().anyRequest().permitAll()
+        httpSecurity
+                .authorizeRequests()//认证配置
+                .antMatchers("/user/**") //释放路径
+                .permitAll() // 指定 URL 无需保护。 无需认证授权
+                .and()
+                .formLogin()
+                      .loginProcessingUrl("/user/login") // 自定义的登录接口
+                      .defaultSuccessUrl("/user/sayHi")  //利用重定向避免405错误 如果不是这样会出现post请求接口路径未找到
+                      .permitAll()//允许表单登录
+                .and()
+                      .authorizeRequests()
+                      .anyRequest()
+                      .authenticated() //需要认证授权
                 .and().csrf().disable();//其他请求需要认证
-
     }
+
 
 }
