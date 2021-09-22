@@ -44,6 +44,7 @@
         <module>my-commen</module>
         <module>My-DesignPatterns</module>
         <module>my-Oauth2</module>
+        <module>my-Oauth2-service</module>
     </modules>
 
     <dependencyManagement>
