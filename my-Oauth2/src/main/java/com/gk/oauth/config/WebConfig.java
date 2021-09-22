@@ -6,7 +6,6 @@ package com.gk.oauth.config;
  * @date 2021/6/1 23:26
  */
 
-import com.gk.oauth.filter.AdminInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -50,16 +49,16 @@ public  class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册TestInterceptor拦截器
-        InterceptorRegistration registration = registry.addInterceptor(new AdminInterceptor());
-        registration.addPathPatterns("/**");                      //所有路径都被拦截
-        registration.excludePathPatterns(                         //添加不拦截路径
-                "你的登陆路径",            //登录
-                "/**/*.html",            //html静态资源
-                "/**/*.js",              //js静态资源
-                "/**/*.css",             //css静态资源
-                "/**/*.woff",
-                "/**/*.ttf"
-        );
+//        InterceptorRegistration registration = registry.addInterceptor(new AdminInterceptor());
+//        registration.addPathPatterns("/**");                      //所有路径都被拦截
+//        registration.excludePathPatterns(                         //添加不拦截路径
+//                "你的登陆路径",            //登录
+//                "/**/*.html",            //html静态资源
+//                "/**/*.js",              //js静态资源
+//                "/**/*.css",             //css静态资源
+//                "/**/*.woff",
+//                "/**/*.ttf"
+//        );
     }
 
     @Override

@@ -4,9 +4,11 @@ package com.gk.oauth.LoginControler;
 import com.gk.commen.param.request.UserReq;
 import com.gk.commen.param.result.LoginResult;
 import com.gk.oauth.organization.service.ISysUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  **/
 @RestController
+@Slf4j
 @RequestMapping("/user")
 public class LoginControler {
 
@@ -26,7 +29,7 @@ public class LoginControler {
 
     @RequestMapping("/login")
     public LoginResult login(String userName, String password, String url) {
-
+        log.error(userName+"-----------------"+password);
         LoginResult result = new LoginResult();
         return result;
     }
