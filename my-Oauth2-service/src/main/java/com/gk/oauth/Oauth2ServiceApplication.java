@@ -15,8 +15,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  *@Version 1.0
  **/
 @SpringBootApplication
-@EnableEurekaClient
-@EnableAsync(proxyTargetClass = true)
 public class Oauth2ServiceApplication {
         public static void main(String[] args) {
             SpringApplication.run(Oauth2ServiceApplication.class, args);

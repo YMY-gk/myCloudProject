@@ -22,9 +22,9 @@ public class MyUserDetialService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         // 判断用户名是否存在
-        if (!"user".equals(username)){
-            throw new UsernameNotFoundException("用户名不存在！");
-        }
+//        if (!"user".equals(username)){
+//            throw new UsernameNotFoundException("用户名不存在！");
+//        }
         log.error("-----------------------------loadUserByUsername-----------------------------------");
         // 从数据库中获取的密码 atguigu 的密文
         String pwd ="user";
