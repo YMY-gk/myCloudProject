@@ -39,7 +39,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
 
         String password = user.getPassword();
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper();
-        queryWrapper.lambda().eq(SysUser::getLoginName,user.getLoginName());
+      //  queryWrapper.lambda().eq(SysUser::getLoginName,user.getLoginName());
         SysUser u= mapper.selectOne(queryWrapper);
         if(u!=null){
             throw new Exception("该用户已经存在了");
@@ -67,7 +67,7 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> implemen
     }
     public SysUser findByName(String name){
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper();
-        queryWrapper.lambda().eq(SysUser::getLoginName,name);
+     //   queryWrapper.lambda().eq(SysUser::getLoginName,name);
         return  mapper.selectOne(queryWrapper);
     }
     public PageResultObject list(UserSearch userSearch){

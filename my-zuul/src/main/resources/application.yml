@@ -13,3 +13,9 @@ zuul:
     company:
       path: /u/**
       serviceId: company
+    oauth:
+        path: /o/**
+        serviceId: oauth
+    user:
+        path: /ceshi/**
+        serviceId: user

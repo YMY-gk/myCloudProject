@@ -2,6 +2,7 @@ package com.gk.zuul.Filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2021/4/6 0:10
  */
 @Component
+@Slf4j
 public class PreFilter extends ZuulFilter {
 /*
 “pre” 预过滤器 - 在路由分发一个请求之前调用。

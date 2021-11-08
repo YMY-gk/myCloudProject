@@ -45,6 +45,7 @@
         <module>My-DesignPatterns</module>
         <module>my-Oauth2</module>
         <module>my-Oauth2-service</module>
+        <module>my-lock</module>
     </modules>
 
     <dependencyManagement>
