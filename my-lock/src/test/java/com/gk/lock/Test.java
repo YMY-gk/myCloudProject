@@ -1,6 +1,8 @@
 package com.gk.lock;
 
+import com.gk.lock.task.ScheduleTask;
 import com.gk.lock.utils.RedisLockUtils;
+import com.gk.lock.utils.ReentrantLockUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,45 +31,73 @@ public class Test {
 
     @org.junit.Test
     public void test() {
-        redisTemplate.opsForValue().set("zhangsan", 1, 100000, TimeUnit.MINUTES);
+        ScheduledExecutorService pool= Executors.newScheduledThreadPool(6);
+
+        ScheduleTask task = new ScheduleTask(redisTemplate);
+        pool.schedule(task,1,TimeUnit.SECONDS);
         while(true) {
             try {
                 while(true) {
-                    if (RedisLockUtils.tryGetDistributedLock(redisTemplate, "aaa", "zhangsan+1", 1000000000)) {
+                    if (ReentrantLockUtils.tryGetDistributedLock(redisTemplate, "aaa", "zhangsan+1", 30000l)) {
                         break;
                     } else {
                         System.out.println(Thread.currentThread() + "---------------------------->erer-----:>" + redisTemplate.opsForValue().get("zhangsan"));
 
                     }
                 }
+                Thread.currentThread().sleep(1000);
                 redisTemplate.opsForValue().increment("zhangsan", 1);
                 System.out.println(Thread.currentThread() + "---------------------------->" + redisTemplate.opsForValue().get("zhangsan"));
+                break;
+              //  this.test02();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RedisLockUtils.releaseDistributedLock(redisTemplate, "aaa", "zhangsan+1");
+               // ReentrantLockUtils.releaseDistributedLock(redisTemplate, "aaa", "zhangsan+1");
             }
         }
     }
+    @org.junit.Test
+    public void test02() {
+            try {
+                while(true) {
+                    if (ReentrantLockUtils.tryGetDistributedLock(redisTemplate, "aaa", "zhangsan+1", 1000000000l)) {
+                        break;
+                    } else {
+                        System.out.println(Thread.currentThread() + "---------------------------->erer-----:>" + redisTemplate.opsForValue().get("zhangsan"));
 
+                    }
+                }
+                Thread.currentThread().sleep(1000);
+                redisTemplate.opsForValue().increment("zhangsan", 1);
+                System.out.println(Thread.currentThread() + "---------------------------->22" + redisTemplate.opsForValue().get("zhangsan"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                ReentrantLockUtils.releaseDistributedLock(redisTemplate, "aaa", "zhangsan+1");
+            }
+
+    }
     @org.junit.Test
     public void test01() {
         while(true) {
             try {
                 while(true) {
-                    if (RedisLockUtils.tryGetDistributedLock(redisTemplate, "aaa", "zhangsan+1", 1000000000)) {
+                    if (ReentrantLockUtils.tryGetDistributedLock(redisTemplate, "aaa", "zhangsan+1", 1000000000l)) {
                        break;
                     } else {
                         System.out.println(Thread.currentThread() + "---------------------------->erer-----:>" + redisTemplate.opsForValue().get("zhangsan"));
 
                     }
                 }
+                Thread.currentThread().sleep(1000);
                 redisTemplate.opsForValue().increment("zhangsan", 1);
                 System.out.println(Thread.currentThread() + "---------------------------->" + redisTemplate.opsForValue().get("zhangsan"));
+                this.test02();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RedisLockUtils.releaseDistributedLock(redisTemplate, "aaa", "zhangsan+1");
+                ReentrantLockUtils.releaseDistributedLock(redisTemplate, "aaa", "zhangsan+1");
             }
         }
     }

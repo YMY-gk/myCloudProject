@@ -1,5 +1,6 @@
 package com.gk.lock.utils;
 
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;

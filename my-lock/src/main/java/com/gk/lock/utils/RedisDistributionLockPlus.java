@@ -5,8 +5,6 @@ package com.gk.lock.utils;
  * @class myCloudProject
  * @date 2021/11/8 17:49
  */
-package com.example.core;
-
 import lombok.Data;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -115,7 +113,7 @@ public class RedisDistributionLockPlus {
                 long bizExpire = expire == 0L ? DEFAULT_LOCK_TIMEOUT : expire;
                 String lockKeyRenew = lockKey + "_renew";
 
-                RedisScript<Long> script = RedisScript.of(LOCK_SCRIPT, Long.class);
+                RedisScript<Long> script =null; //RedisScript.of(LOCK_SCRIPT, Long.class);
                 List<String> keys = new ArrayList<>();
                 keys.add(lockKey);
                 keys.add(lockKeyRenew);
@@ -184,7 +182,7 @@ public class RedisDistributionLockPlus {
         // 删除已完成key，先删除本地缓存，减少redis压力, 分布式锁，只有一个，所以这里不加锁
         lockContentMap.remove(lockKey);
 
-        RedisScript<Long> script = RedisScript.of(UNLOCK_SCRIPT, Long.class);
+        RedisScript<Long> script = null;//RedisScript.of(UNLOCK_SCRIPT, Long.class);
         List<String> keys = new ArrayList<>();
         keys.add(lockKey);
         keys.add(lockKeyRenew);
@@ -223,7 +221,7 @@ public class RedisDistributionLockPlus {
         String requestId = lockContent.getRequestId();
         long timeOut = (lockContent.getExpireTime() - lockContent.getStartTime()) / 1000;
 
-        RedisScript<Long> script = RedisScript.of(RENEW_SCRIPT, Long.class);
+        RedisScript<Long> script = null;//RedisScript.of(RENEW_SCRIPT, Long.class);
         List<String> keys = new ArrayList<>();
         keys.add(lockKey);
 
