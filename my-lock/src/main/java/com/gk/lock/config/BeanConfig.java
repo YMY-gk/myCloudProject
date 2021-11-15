@@ -3,6 +3,9 @@ package com.gk.lock.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
@@ -65,6 +68,15 @@ public class BeanConfig {
         Integer timeout = redisProperties.getTimeout();
         String password = redisProperties.getPassword();
         return new JedisPool(config, host, port, timeout, password);
+    }
+    @Bean
+    public RedissonClient redissonClientBean() {
+        Config config = new Config();
+        String host = redisProperties.getHost();
+        Integer port = redisProperties.getPort();
+        Integer timeout = redisProperties.getTimeout();
+        config.useSingleServer().setAddress(host+":"+port);
+        return  Redisson.create(config);
     }
 
 }

@@ -5,6 +5,7 @@ import com.gk.lock.utils.RedisLockUtils;
 import com.gk.lock.utils.ReentrantLockUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
+import org.redisson.api.RedissonClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -27,7 +28,14 @@ public class Test {
     @Resource
     public RedisTemplate redisTemplate;
     @Resource
+    public RedissonClient redissonClient;
+    @Resource
     public JedisPool jedisPool;
+
+    @org.junit.Test
+    public void redissonclient() {
+        redissonClient.
+    }
 
     @org.junit.Test
     public void test() {
