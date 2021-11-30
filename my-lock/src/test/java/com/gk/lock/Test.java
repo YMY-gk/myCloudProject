@@ -32,10 +32,10 @@ public class Test {
     @Resource
     public JedisPool jedisPool;
 
-    @org.junit.Test
-    public void redissonclient() {
-        redissonClient.
-    }
+//    @org.junit.Test
+//    public void redissonclient() {
+//        redissonClient.
+//    }
 
     @org.junit.Test
     public void test() {
