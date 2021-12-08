@@ -313,13 +313,13 @@ public class DistributedLock implements Lock, Watcher {
                         } catch (IOException e) {
                             System.out.println("b获锁失败"+ e);
                         } catch (InterruptedException e) {
-                            log.error("b获锁失败", e);
+                            System.out.println("b获锁失败"+ e);
                         } catch (KeeperException e) {
-                            log.error("b获锁失败", e);
+                            System.out.println("b获锁失败"+ e);
                         } finally {
-                            log.info("b释放锁前------------------------------ ");
+                            System.out.println("b释放锁前------------------------------ ");
                             lock.unlock();
-                            log.info("b释放锁了 ");
+                            System.out.println("b释放锁了 ");
                         }
                     }
                 }
@@ -334,17 +334,17 @@ public class DistributedLock implements Lock, Watcher {
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
                             sleep(2000);
-                            log.info("c得到锁了");
+                            System.out.println("c得到锁了");
                         } catch (IOException e) {
-                            log.error("c获锁失败", e);
+                            System.out.println("c获锁失败"+e);
                         } catch (InterruptedException e) {
-                            log.error("c获锁失败", e);
+                            System.out.println("c获锁失败"+ e);
                         } catch (KeeperException e) {
-                            log.error("c获锁失败", e);
+                            System.out.println("c获锁失败"+ e);
                         } finally {
-                            log.info("c释放锁前------------------------------ ");
+                            System.out.println("c释放锁前------------------------------ ");
                             lock.unlock();
-                            log.info("c释放锁了 ");
+                            System.out.println("c释放锁了 ");
                         }
                     }
                 }
@@ -359,17 +359,17 @@ public class DistributedLock implements Lock, Watcher {
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
                             sleep(2000);
-                            log.info("d得到锁了");
+                            System.out.println("d得到锁了");
                         } catch (IOException e) {
-                            log.error("d获锁失败", e);
+                            System.out.println("d获锁失败"+e);
                         } catch (InterruptedException e) {
-                            log.error("d获锁失败", e);
+                            System.out.println("d获锁失败"+e);
                         } catch (KeeperException e) {
-                            log.error("d获锁失败", e);
+                            System.out.println("d获锁失败"+e);
                         } finally {
-                            log.info("d释放锁前------------------------------ ");
+                            System.out.println("d释放锁前------------------------------ ");
                             lock.unlock();
-                            log.info("d释放锁了 ");
+                            System.out.println("d释放锁了 ");
                         }
                     }
                 }
@@ -384,17 +384,17 @@ public class DistributedLock implements Lock, Watcher {
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
                             sleep(2000);
-                            log.info("e得到锁了");
+                            System.out.println("e得到锁了");
                         } catch (IOException e) {
-                            log.error("e获锁失败", e);
+                            System.out.println("e获锁失败"+e);
                         } catch (InterruptedException e) {
-                            log.error("e获锁失败", e);
+                            System.out.println("e获锁失败"+e);
                         } catch (KeeperException e) {
-                            log.error("e获锁失败", e);
+                            System.out.println("e获锁失败"+ e);
                         } finally {
-                            log.info("e释放锁前------------------------------ ");
+                            System.out.println("e释放锁前------------------------------ ");
                             lock.unlock();
-                            log.info("e释放锁了 ");
+                            System.out.println("e释放锁了 ");
                         }
                     }
                 }
