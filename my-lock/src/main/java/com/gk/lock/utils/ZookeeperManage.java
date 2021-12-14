@@ -15,41 +15,43 @@ import java.util.concurrent.CountDownLatch;
 public class ZookeeperManage {
 
     ZooKeeper zookeeper = null;
-    static Watcher watcher= new Watcher() {
-        @Override
-        public void process(WatchedEvent watchedEvent) {
-            /**
-             * 节点有数据变化
-             */
-            if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//节点有数据变化
 
-            }else if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//
-            }
-            try {
-                if(watchedEvent.getState().equals(Watcher.Event.KeeperState.SyncConnected)){
-                    if (watchedEvent.getType()== Event.EventType.None){
-                        System.out.println("===========连接成功===========");
-                    }
-                    else if(watchedEvent.getType()== Watcher.Event.EventType.NodeCreated){
-                        System.out.println("=>通知:节点创建"+watchedEvent.getPath());
-                    }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDataChanged){
-                        System.out.println("=>通知：节点修改"+watchedEvent.getPath());
-                    }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDeleted){
-                        System.out.println("=>通知：节点删除"+watchedEvent.getPath());
-                    }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeChildrenChanged){
-                        System.out.println("=>通知：子节点删除"+watchedEvent.getPath());
-                    }
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-
-        }
-
-    };
     public ZookeeperManage(String host,Integer timerout) throws IOException, InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
+        Watcher watcher= new Watcher() {
+            @Override
+            public void process(WatchedEvent watchedEvent) {
+                /**
+                 * 节点有数据变化
+                 */
+                if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//节点有数据变化
+
+                }else if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//
+                }
+                try {
+                    if(watchedEvent.getState().equals(Watcher.Event.KeeperState.SyncConnected)){
+                        if (watchedEvent.getType()== Event.EventType.None){
+                            System.out.println("===========连接成功===========");
+                        }
+                        else if(watchedEvent.getType()== Watcher.Event.EventType.NodeCreated){
+                            System.out.println("=>通知:节点创建"+watchedEvent.getPath());
+                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDataChanged){
+                            System.out.println("=>通知：节点修改"+watchedEvent.getPath());
+                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDeleted){
+                            System.out.println("=>通知：节点删除"+watchedEvent.getPath());
+                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeChildrenChanged){
+                            System.out.println("=>通知：子节点删除"+watchedEvent.getPath());
+                        }
+                    }
+                    latch.countDown();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+            }
+
+        };
         zookeeper = new ZooKeeper(host, timerout, watcher);
         latch.await();
     }
