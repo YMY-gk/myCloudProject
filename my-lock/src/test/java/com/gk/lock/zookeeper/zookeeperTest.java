@@ -45,49 +45,8 @@ public class zookeeperTest{
     private String pathSeperator = "/";
     private String host ="182.254.221.85:2181";
 
-    public  ZooKeeper createZkChanel(String host,String timerout ) throws IOException, InterruptedException {
-        /**
-         * 等待线程执行完成
-         *
-         */
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        Watcher watcher= new Watcher() {
-            @Override
-            public void process(WatchedEvent watchedEvent) {
-                /**
-                 * 节点有数据变化
-                 */
-                if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//节点有数据变化
+    public   void  createZkChanel(String host,String timerout,String pathSeperator ) throws IOException, InterruptedException {
 
-                }else if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//
-                }
-                try {
-                    if(watchedEvent.getState().equals(Watcher.Event.KeeperState.SyncConnected)){
-                        if (watchedEvent.getType()== Event.EventType.None){
-                            System.out.println("===========连接成功===========");
-                        }
-                        else if(watchedEvent.getType()== Watcher.Event.EventType.NodeCreated){
-                            System.out.println("=>通知:节点创建"+watchedEvent.getPath());
-                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDataChanged){
-                            System.out.println("=>通知：节点修改"+watchedEvent.getPath());
-                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDeleted){
-                            System.out.println("=>通知：节点删除"+watchedEvent.getPath());
-                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeChildrenChanged){
-                            System.out.println("=>通知：子节点删除"+watchedEvent.getPath());
-                        }
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-
-            }
-
-        }
-        ZooKeeper zk  = new ZooKeeper(host,SESSION_TIMEOUT,watcher);
-        countDownLatch.await();
-        zk.create()
-        return zk;
     }
 
 }
