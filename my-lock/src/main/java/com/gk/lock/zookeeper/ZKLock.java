@@ -125,7 +125,36 @@ public class ZKLock implements Lock {
 
     @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
-        return false;
+        LockContent lockContentOld = lockContentMap.get(threadName);
+        Long startTime = System.currentTimeMillis();
+        boolean unLocked = null == lockContentOld;
+        if (unLocked) {
+            if (!tryLock()) {
+                return false;
+            } else {
+
+                Long endTime = System.currentTimeMillis();
+                if ((endTime - startTime) > unit.toMillis(time)) {
+                    System.out.println("等待锁超时 {}"+(endTime - startTime));
+                    deleteNode();
+                    return false;
+                }
+                // 将锁放入map
+                LockContent lockContent = new LockContent();
+                lockContent.setRequestId(lockName);
+                lockContent.setThread(Thread.currentThread());
+                lockContent.setLockCount(1);
+                lockContentMap.put(threadName, lockContent);
+            }
+        }else{
+            // 重复获取锁，在线程池中由于线程复用，线程相等并不能确定是该线程的锁
+            if (Thread.currentThread() == lockContentOld.getThread()
+                    && lockName.equals(lockContentOld.getRequestId())) {
+                // 计数 +1
+                lockContentOld.setLockCount(lockContentOld.getLockCount() + 1);
+            }
+        }
+        return true;
     }
 
     @Override
