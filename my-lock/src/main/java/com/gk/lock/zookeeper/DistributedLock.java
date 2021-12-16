@@ -1,4 +1,4 @@
-package com.gk.lock.utils;
+package com.gk.lock.zookeeper;
 
 /**
  * @author guokui
@@ -6,13 +6,10 @@ package com.gk.lock.utils;
  * @date 2021/11/29 14:51
  */
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.data.Stat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -31,7 +28,7 @@ import static java.lang.Thread.sleep;
 @Slf4j
 public class DistributedLock implements Lock, Watcher {
 
-    private static final int SESSION_TIMEOUT = 2000*100;
+    private static final int SESSION_TIMEOUT = 2000000*100;
     private String lockName;
     private String root = "/locks";
     private String pathSeperator = "/";
@@ -92,6 +89,9 @@ public class DistributedLock implements Lock, Watcher {
 
     @Override
     public void process(WatchedEvent event) {
+        log.info("-----------------------------------------监听事件的状态: {}",event.getState());
+        log.info("-----------------------------------------监听事件的路径: {}",event.getPath());
+        log.info("-----------------------------------------监听事件的类型: {}",event.getType());
         if (event.getState() == Event.KeeperState.SyncConnected) {
             connectedSignal.countDown();
             return;
@@ -131,7 +131,7 @@ public class DistributedLock implements Lock, Watcher {
     public boolean tryLock() {
         String requiredPath = lockPath + pathSeperator +"lock" + idSeperator;
         try {
-            myNode = zk.create(requiredPath, new byte[0], Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+            myNode = zk.create(requiredPath, new byte[0], Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
             System.out.println("创建节点成功{}"+myNode);
         } catch (KeeperException | InterruptedException e) {
             System.out.println("创建节点异常{}"+ myNode+e);
@@ -173,10 +173,13 @@ public class DistributedLock implements Lock, Watcher {
 
     private boolean doJudgeLock() throws KeeperException, InterruptedException {
         List<String> lockNodes = zk.getChildren(lockPath, false);
+        sleep(1000);
+
         if (lockNodes != null && lockNodes.size() > 0) {
             Collections.sort(lockNodes);
             String nodeName = myNode.substring(myNode.lastIndexOf("/")+1);
             System.out.println("判断节点位置，得到当前节点{}"+ myNode);
+
             if (lockNodes.indexOf(nodeName) == -1) {
                 System.out.println("创建后但找不到本节点，网络问题{}"+myNode);
                 return false;
@@ -210,9 +213,12 @@ public class DistributedLock implements Lock, Watcher {
         Stat stat;
         try {
             System.out.println("查看锁状态{}"+waitNode);
+            latch = new CountDownLatch(1);
             final Watcher previousListener = new Watcher() {
                 @Override
                 public void process(WatchedEvent event) {
+                    System.out.println("监听到前置节点释放信息{}"+waitNode);
+
                     if (event.getType() == Event.EventType.NodeDeleted) {
                         System.out.println("监听到前置节点释放信息{}"+waitNode);
                         if(latch != null) {
@@ -233,7 +239,6 @@ public class DistributedLock implements Lock, Watcher {
         if (stat != null) {
             try {
                 System.out.println("监听锁，等待前置节点{} 事件,"+ waitNode);
-                latch = new CountDownLatch(1);
                 long startTime = System.currentTimeMillis();
                 if (time > 0) {
                     latch.await(time, unit);
@@ -282,9 +287,9 @@ public class DistributedLock implements Lock, Watcher {
                         try {
                             //我的zookeeper地址:192.168.40.204:2181
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
+                            sleep(10000);
                             lock.lock();
-                            System.out.println("a得到锁了，xiumian ");
-                            sleep(5000);
+                            System.out.println("a得到锁了，xiumian -----------------"+(num++));
                         } catch (IOException e) {
                             System.out.println("a获锁失败"+e);
                         } catch (InterruptedException e) {
@@ -306,10 +311,12 @@ public class DistributedLock implements Lock, Watcher {
                     public void run() {
                         DistributedLock lock = null;
                         try {
+                            sleep(1000);
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
-                            sleep(1500);
-                            System.out.println("b得到锁了");
+                            sleep(10000);
+                            System.out.println("b得到锁了-----------------"+(num++));
+
                         } catch (IOException e) {
                             System.out.println("b获锁失败"+ e);
                         } catch (InterruptedException e) {
@@ -331,10 +338,11 @@ public class DistributedLock implements Lock, Watcher {
                     public void run() {
                         DistributedLock lock = null;
                         try {
+                            sleep(1000);
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
-                            sleep(2000);
-                            System.out.println("c得到锁了");
+                            sleep(10000);
+                            System.out.println("c得到锁了-----------------"+(num++));
                         } catch (IOException e) {
                             System.out.println("c获锁失败"+e);
                         } catch (InterruptedException e) {
@@ -356,10 +364,11 @@ public class DistributedLock implements Lock, Watcher {
                     public void run() {
                         DistributedLock lock = null;
                         try {
+                            sleep(1000);
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
-                            sleep(2000);
-                            System.out.println("d得到锁了");
+                            sleep(10000);
+                            System.out.println("d得到锁了-----------------"+(num++));
                         } catch (IOException e) {
                             System.out.println("d获锁失败"+e);
                         } catch (InterruptedException e) {
@@ -381,10 +390,11 @@ public class DistributedLock implements Lock, Watcher {
                     public void run() {
                         DistributedLock lock = null;
                         try {
+                            sleep(1000);
                             lock = new DistributedLock("182.254.221.85:2181", "testlock");
                             lock.lock();
-                            sleep(2000);
-                            System.out.println("e得到锁了");
+                            sleep(10000);
+                            System.out.println("e得到锁了-----------------"+(num++));
                         } catch (IOException e) {
                             System.out.println("e获锁失败"+e);
                         } catch (InterruptedException e) {

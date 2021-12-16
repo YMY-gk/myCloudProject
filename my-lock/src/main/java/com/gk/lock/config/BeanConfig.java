@@ -3,10 +3,14 @@ package com.gk.lock.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gk.lock.zookeeper.WatcherManage;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.zookeeper.ZooKeeper;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -17,12 +21,15 @@ import org.springframework.stereotype.Controller;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.concurrent.CountDownLatch;
+
 /**
  * @author guokui
  * @class myCloudProject
  * @date 2021/11/8 15:49
  */
 @Controller
+@Slf4j
 public class BeanConfig {
 
 
@@ -69,14 +76,35 @@ public class BeanConfig {
         String password = redisProperties.getPassword();
         return new JedisPool(config, host, port, timeout, password);
     }
-    @Bean
-    public RedissonClient redissonClientBean() {
-        Config config = new Config();
-        String host = redisProperties.getHost();
-        Integer port = redisProperties.getPort();
-        Integer timeout = redisProperties.getTimeout();
-        config.useSingleServer().setAddress(host+":"+port);
-        return  Redisson.create(config);
+//    @Bean
+//    public RedissonClient redissonClientBean() {
+//        Config config = new Config();
+//        String host = redisProperties.getHost();
+//        Integer port = redisProperties.getPort();
+//        Integer timeout = redisProperties.getTimeout();
+//        config.useSingleServer().setAddress(host+":"+port);
+//        return  Redisson.create(config);
+//    }
+
+    @Value("${zookeeper.address}")
+    private String connectString;
+
+    @Value("${zookeeper.timeout}")
+    private int sessionTimeout;
+
+
+    @Bean(name = "zkClient")
+    public ZooKeeper zkClient() {
+        ZooKeeper zooKeeper = null;
+        try {
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+            zooKeeper = new ZooKeeper(connectString, sessionTimeout, new WatcherManage(countDownLatch));
+            countDownLatch.await();
+        } catch (Exception e) {
+            log.error(" 初始化Zookeeper连接状态异常: {}",e.getMessage());
+        }
+        return  zooKeeper;
     }
+
 
 }

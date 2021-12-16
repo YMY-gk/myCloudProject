@@ -1,4 +1,4 @@
-package com.gk.lock.utils;
+package com.gk.lock.zookeeper;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
@@ -18,41 +18,8 @@ public class ZookeeperManage {
 
     public ZookeeperManage(String host,Integer timerout) throws IOException, InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
-        Watcher watcher= new Watcher() {
-            @Override
-            public void process(WatchedEvent watchedEvent) {
-                /**
-                 * 节点有数据变化
-                 */
-                if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//节点有数据变化
 
-                }else if (watchedEvent.getType() == Event.EventType.NodeDataChanged) {//
-                }
-                try {
-                    if(watchedEvent.getState().equals(Watcher.Event.KeeperState.SyncConnected)){
-                        if (watchedEvent.getType()== Event.EventType.None){
-                            System.out.println("===========连接成功===========");
-                        }
-                        else if(watchedEvent.getType()== Watcher.Event.EventType.NodeCreated){
-                            System.out.println("=>通知:节点创建"+watchedEvent.getPath());
-                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDataChanged){
-                            System.out.println("=>通知：节点修改"+watchedEvent.getPath());
-                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeDeleted){
-                            System.out.println("=>通知：节点删除"+watchedEvent.getPath());
-                        }else if(watchedEvent.getType()== Watcher.Event.EventType.NodeChildrenChanged){
-                            System.out.println("=>通知：子节点删除"+watchedEvent.getPath());
-                        }
-                    }
-                    latch.countDown();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-
-            }
-
-        };
-        zookeeper = new ZooKeeper(host, timerout, watcher);
+        zookeeper = new ZooKeeper(host, timerout, new WatcherManage(latch,"创建"));
         latch.await();
     }
 
@@ -96,7 +63,9 @@ public class ZookeeperManage {
     }
 
     private void cycleCreate(String path) throws KeeperException, InterruptedException {
-        Stat stat = zookeeper.exists(path, null);
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Stat stat = zookeeper.exists(path, new WatcherManage(latch,"查询数据是否存在"));
         if (stat == null) {
             String p = getParentPath(path);
             cycleCreate(p);// 递归
@@ -142,8 +111,9 @@ public class ZookeeperManage {
 
     public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
         ZookeeperManage zoo = new ZookeeperManage("182.254.221.85:2181",5000);
-        zoo.setData("/top/enjoy/abc", "abc");
-        zoo.setData("/top/enjoy/bbb", "bbb");
+        System.out.println(zoo);
+        zoo.setData("/lock", "abc");
+        zoo.setData("/top/enjoy", "bbb");
         zoo.setData("/top/enjoy/ccc", "ccc");
         System.out.println("成功新增");
         zoo.delete("/top/enjoy");

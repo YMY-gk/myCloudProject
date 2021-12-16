@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  *@Version 1.0
  **/
 @SpringBootApplication
-@EnableEurekaClient
+//@EnableEurekaClient
 @ComponentScan(basePackages = "com.gk.lock.*")
 @MapperScan(basePackages = "com.gk.lock.*.mapper")
 @EnableAsync(proxyTargetClass = true)
