@@ -5,6 +5,10 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gk.lock.zookeeper.WatcherManage;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.ZooKeeper;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -93,7 +97,7 @@ public class BeanConfig {
     private int sessionTimeout;
 
 
-    @Bean(name = "zkClient")
+    @Bean
     public ZooKeeper zkClient() {
         ZooKeeper zooKeeper = null;
         try {
@@ -104,6 +108,13 @@ public class BeanConfig {
             log.error(" 初始化Zookeeper连接状态异常: {}",e.getMessage());
         }
         return  zooKeeper;
+    }
+    @Bean
+    public CuratorFramework curatorFramework() {
+      RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000,3);
+      CuratorFramework client = CuratorFrameworkFactory.newClient(connectString,retryPolicy);
+      client.start();
+      return client;
     }
 
 
